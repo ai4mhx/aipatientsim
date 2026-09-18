@@ -3,7 +3,7 @@
 Data and analysis code for the study of language model simulated psychiatric
 patients described in:
 
-> [Author list]. Structural fidelity and unreliable affective evaluation in
+> Structural fidelity and unreliable affective evaluation in
 > language model simulations of psychiatric patients. Submitted to
 > *Communications AI & Computing* (2026).
 
