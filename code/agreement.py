@@ -8,7 +8,7 @@ Agreement is computed across all three raters on the 30 Phase 2 transcripts, wit
 each ordinal domain dichotomised at its scale maximum, which is the coding
 specified on the CODES tab of the rating workbook.
 
-    python code/agreement.py [path/to/ratings_master.xlsx]
+    python code/agreement.py [transcripts/ratings_master.xlsx]
 """
 import sys
 from itertools import combinations
@@ -16,7 +16,7 @@ from itertools import combinations
 import numpy as np
 import pandas as pd
 
-XLSX = sys.argv[1] if len(sys.argv) > 1 else "data/ratings_master.xlsx"
+XLSX = sys.argv[1] if len(sys.argv) > 1 else "transcripts/ratings_master.xlsx"
 
 # code, label, total column, scale maximum
 DOMAINS = [
