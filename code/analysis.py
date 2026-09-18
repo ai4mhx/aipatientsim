@@ -8,7 +8,7 @@ Phase 2  ChatGPT-4o versus Gemini 2.5 Flash versus Claude Sonnet 4, ten each,
 Also     diagnostic accuracy against the target diagnosis encoded in each
          transcript identifier.
 
-    python code/analysis.py [path/to/ratings_master.xlsx]
+    python code/analysis.py [transcripts/ratings_master.xlsx]
 """
 import sys
 
@@ -16,7 +16,7 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-XLSX = sys.argv[1] if len(sys.argv) > 1 else "data/ratings_master.xlsx"
+XLSX = sys.argv[1] if len(sys.argv) > 1 else "transcripts/ratings_master.xlsx"
 RNG = np.random.default_rng(20260918)
 N_BOOT = 6000
 
