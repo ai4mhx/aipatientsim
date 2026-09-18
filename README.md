@@ -287,9 +287,3 @@ participation. No part of this study was preregistered.
 Code in `code/` is released under the MIT Licence. Data in `data/` and
 `transcripts/` are released under CC BY 4.0. If you use either, please cite the
 paper.
-
-## Contact
-
-[Corresponding author name], [email]
-[Department], National Institute of Mental Health and Neurosciences (NIMHANS),
-Bengaluru 560029, India
