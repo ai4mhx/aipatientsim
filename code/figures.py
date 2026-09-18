@@ -15,7 +15,7 @@ from matplotlib.lines import Line2D
 import numpy as np
 import pandas as pd
 
-XLSX = "data/ratings_master.xlsx"
+XLSX = "transcripts/ratings_master.xlsx"
 
 plt.rcParams.update({
     "font.family": "sans-serif",
