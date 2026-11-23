@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
-"""Colour figures for the Communications AI & Computing submission.
+"""Colour figures for the Nature Communications submission.
 
-Figures 1 to 4 carry the values reported in Tables 1 to 4 of the manuscript.
-Figure 5 is computed directly from THESIS_DATA__4_.xlsx, MASTER SHEET.
+Figures 1 to 3 carry the values reported in Tables 1 to 3 of the manuscript.
+Figures 4 and 5 are computed directly from transcripts/ratings_master.xlsx,
+MASTER SHEET. Figure 5 reports Fleiss' kappa with a bootstrap 95% CI
+(Table 4), using the functions in agreement.py.
 Palette is colourblind-safe (Okabe-Ito derived) and still legible in greyscale
 because every series also differs in shape or hatch.
+
+    python code/figures.py
 """
 import os
 import matplotlib
@@ -19,7 +23,7 @@ XLSX = "transcripts/ratings_master.xlsx"
 
 plt.rcParams.update({
     "font.family": "sans-serif",
-    "font.sans-serif": ["Liberation Sans", "DejaVu Sans"],
+    "font.sans-serif": ["Liberation Sans", "Arial", "DejaVu Sans"],
     "font.size": 8, "axes.labelsize": 9, "axes.titlesize": 9,
     "xtick.labelsize": 8, "ytick.labelsize": 8, "legend.fontsize": 8,
     "axes.linewidth": 0.7, "xtick.major.width": 0.7, "ytick.major.width": 0.7,
@@ -92,9 +96,9 @@ def figure1():
     box(75, 37, 24, 13, "Phase 1  human vs model\n$\\it{n}$ = 6 per group, matched\n"
         "Mann-Whitney U, Fisher\n(Fig. 2, Table 2)", fill="#FDEBE0", edge=ORANGE)
     box(75, 21, 24, 13, "Phase 2  model vs model\n$\\it{n}$ = 10 per model\n"
-        "Kruskal-Wallis, Fisher\n(Fig. 3 and 5, Table 3)", fill="#E3F0F8", edge=BLUE)
+        "Kruskal-Wallis, Fisher\n(Figs. 3 and 4, Table 3)", fill="#E3F0F8", edge=BLUE)
     box(75, 4, 24, 14, "Instrument under test\ninter-rater agreement across\n"
-        "all 30 Phase 2 transcripts\n(Fig. 4, Table 4)", fill="#E6F5F0", edge=GREEN, lw=1.4)
+        "all 30 Phase 2 transcripts\n(Fig. 5, Table 4)", fill="#E6F5F0", edge=GREEN, lw=1.4)
 
     arrow(23, 45, 27, 40); arrow(23, 27, 27, 32); arrow(23, 10, 27, 25, rad=0.15)
     arrow(48, 35, 52, 37); arrow(61.5, 29, 61.5, 24)
@@ -225,83 +229,53 @@ def figure3():
     save(fig, "Figure3")
 
 
-# ----------------------------------------------------------------- FIGURE 4
-def figure4():
-    d = [
-        ("Information adequacy: diagnosis",  0.962, 0.929, 0.995, "R"),
-        ("Information adequacy: treatment",  0.960, 0.924, 0.996, "R"),
-        ("Clinical usability: training",     0.929, 0.842, 1.000, "R"),
-        ("Diagnostic accuracy",              0.903, 0.801, 1.000, "R"),
-        ("Diagnostic clarity",               0.876, 0.759, 0.993, "R"),
-        ("Clinical usability: clinical",     0.876, 0.759, 0.993, "R"),
-        ("Diagnostic confidence",            0.863, 0.769, 0.957, "R"),
-        ("Training suitability",             0.819, 0.688, 0.950, "R"),
-        ("Clinical judgement",               0.814, 0.664, 0.965, "R"),
-        ("Symptom presentation",             0.569, 0.340, 0.799, "M"),
-        ("Overall interview realism",        0.545, 0.317, 0.773, "M"),
-        ("Educational value",                0.504, 0.330, 0.678, "M"),
-        ("Safety exploration",               0.477, 0.224, 0.730, "M"),
-        ("Clinical usability: research",     0.446, 0.171, 0.722, "M"),
-        ("Comparative assessment",           0.395, 0.087, 0.703, "M"),
-        ("Educational recommendation",       0.376, 0.150, 0.603, "M"),
-        ("Communication flow",               0.234, -0.062, 0.529, "P"),
-        ("Clinical history",                 0.160, -0.137, 0.457, "P"),
-        ("Emotional expression",             0.111, -0.170, 0.391, "P"),
-        ("Psychological realism",           -0.004, -0.222, 0.214, "P"),
-        ("Information adequacy: risk",      -0.048, -0.280, 0.184, "P"),
-        ("Mental state assessment",         -0.058, -0.260, 0.143, "P"),
-        ("Response patterns",               -0.062, -0.273, 0.149, "P"),
-        ("Engagement quality",              -0.098, -0.308, 0.113, "P"),
-        ("Authenticity indicators",         -0.098, -0.322, 0.127, "P"),
-        ("Clinical credibility",            -0.153, -0.325, 0.019, "P"),
-    ]
-    st = {"R": dict(marker="o", mfc=BLUE, mec=BLUE, ms=5.4, col=BLUE),
-          "M": dict(marker="^", mfc=GREEN, mec=GREEN, ms=5.6, col=GREEN),
-          "P": dict(marker="s", mfc="white", mec=ORANGE, ms=5.0, col=ORANGE)}
-    fig, ax = plt.subplots(figsize=(7.0, 6.4))
-    y = np.arange(len(d))[::-1]
-    for lo, hi, c in [(0.81, 1.02, "#E8F1F8"), (0.61, 0.81, "#F2F7FA"),
-                      (0.41, 0.61, "#EFF7F3"), (0.21, 0.41, "#FBF3EC"),
-                      (-0.40, 0.21, "#FCEDE6")]:
-        ax.axvspan(lo, hi, color=c, zorder=0)
-    for lo, hi, name in [(0.81, 1.02, "Near-perfect"), (0.61, 0.81, "Substantial"),
-                         (0.41, 0.61, "Moderate"), (0.21, 0.41, "Fair"),
-                         (-0.40, 0.21, "Slight or none")]:
-        ax.text((lo + hi) / 2, len(d) - .05, name, ha="center", va="bottom",
-                fontsize=7.0, color=GREY)
-    ax.axvline(0, color=GREY, lw=.9, ls=":", zorder=1)
-    for v in (0.21, 0.81):
-        ax.axvline(v, color=GREY, lw=.7, ls="--", zorder=1)
-    for yi, (lab, k, lo, hi, cls) in zip(y, d):
-        s = st[cls]
-        ax.plot([lo, hi], [yi, yi], color=s["col"], lw=1.6, alpha=.55,
-                solid_capstyle="round", zorder=2)
-        ax.plot([k], [yi], ls="none", zorder=3, mew=1.4,
-                **{kk: vv for kk, vv in s.items() if kk != "col"})
-    ax.set_yticks(y); ax.set_yticklabels([x[0] for x in d])
-    ax.set_ylim(-1.0, len(d) + .9); ax.set_xlim(-0.40, 1.02)
-    ax.set_xlabel("Inter-rater agreement, Gwet's AC1 (95% confidence interval)")
-    for s_ in ("top", "right"):
-        ax.spines[s_].set_visible(False)
-    ax.legend(handles=[
-        Line2D([], [], ls="none", marker="o", mfc=BLUE, mec=BLUE, ms=5.4,
-               label="Referent-anchored judgement"),
-        Line2D([], [], ls="none", marker="^", mfc=GREEN, mec=GREEN, ms=5.6,
-               label="Mixed or partly anchored"),
-        Line2D([], [], ls="none", marker="s", mfc="white", mec=ORANGE, mew=1.4,
-               ms=5.0, label="Phenomenological judgement")],
-        loc="lower right", frameon=True, framealpha=1, edgecolor="#d8d8d8",
-        borderpad=.6)
-    ax.annotate("Agreement below\nchance expectation", xy=(-0.153, 0.15),
-                xytext=(-0.20, 4.6), fontsize=7.2, color=ORANGE,
-                arrowprops=dict(arrowstyle="->", lw=.9, color=ORANGE,
-                                connectionstyle="arc3,rad=0.25"))
-    save(fig, "Figure4")
-
-
 # ----------------------------------------------------------------- FIGURE 5
 def figure5():
-    """Computed directly from the raw rating data."""
+    """Inter-rater agreement, Phase 2 (n = 30). Computed from the raw ratings.
+
+    Fleiss' kappa across the three raters with a percentile-bootstrap 95% CI,
+    against the Landis and Koch strength-of-agreement categories.
+    """
+    from agreement import (load as load_ratings, item_codes, counts_matrix_multi,
+                           fleiss_kappa, boot_kappa_ci, PHASE1_AI, SEED)
+    label = {"G1": "Diagnosis assigned", "H1": "Information adequacy: diagnosis",
+             "H2": "Information adequacy: risk", "H3": "Information adequacy: treatment",
+             "I1": "Usability: clinical assessment", "I2": "Usability: training",
+             "I3": "Usability: research"}
+    df = load_ratings(XLSX)
+    ids = sorted({i for i in df.iid if i[0] in "ABC"} - set(PHASE1_AI))
+    rng = np.random.default_rng(SEED)
+    rows = []
+    for code, lab, codes in item_codes(df, ids):
+        M = counts_matrix_multi(codes)
+        lo, hi = boot_kappa_ci(M, rng)
+        rows.append((label.get(code, lab), fleiss_kappa(M), lo, hi))
+    rows.sort(key=lambda r: r[1])
+    fig, a = plt.subplots(figsize=(6.0, 6.2))
+    y = np.arange(len(rows))
+    for lo, hi, c, n in [(-0.45, 0, "#FCE4D9", "Poor"), (0, 0.2, "#FCEDE6", "Slight"),
+                         (0.2, 0.4, "#FBF3EC", "Fair"), (0.4, 0.6, "#EFF7F3", "Moderate"),
+                         (0.6, 0.8, "#F2F7FA", "Substantial"),
+                         (0.8, 1.02, "#E8F1F8", "Almost\nperfect")]:
+        a.axvspan(lo, hi, color=c, zorder=0)
+        a.text((lo + hi) / 2, len(rows) - 0.2, n, ha="center", va="bottom",
+               fontsize=6.5, color=GREY)
+    a.axvline(0, color=GREY, lw=.8, ls=":")
+    for yi, (lab, k, lo, hi) in zip(y, rows):
+        a.plot([lo, hi], [yi, yi], color=BLUE, lw=1.5, alpha=.55,
+               solid_capstyle="round", zorder=2)
+        a.plot([k], [yi], marker="o", mfc=BLUE, mec=BLUE, ms=5, ls="none", zorder=3)
+    a.set_yticks(y); a.set_yticklabels([r[0] for r in rows])
+    a.set_ylim(-0.8, len(rows) + 0.9); a.set_xlim(-0.45, 1.02)
+    a.set_xlabel("Fleiss' \u03ba (95% CI)")
+    for s_ in ("top", "right"):
+        a.spines[s_].set_visible(False)
+    save(fig, "Figure5")
+
+
+# ----------------------------------------------------------------- FIGURE 4
+def figure4():
+    """Categorical clinician judgements. Computed directly from the raw rating data."""
     df = pd.read_excel(XLSX,
                        sheet_name="MASTER SHEET")
     df = df.rename(columns={df.columns[1]: "rater", df.columns[2]: "iid"})
@@ -391,7 +365,7 @@ def figure5():
     fig.text(0.5, 1.00, "Within each group of bars, from left to right: "
              "Human, ChatGPT-4o, Gemini 2.5 Flash, Claude Sonnet 4",
              ha="center", fontsize=7.0, color=GREY)
-    save(fig, "Figure5")
+    save(fig, "Figure4")
 
 
 figure1(); figure2(); figure3(); figure4(); figure5()

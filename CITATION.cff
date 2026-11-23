@@ -1,0 +1,48 @@
+cff-version: 1.2.0
+message: "If you use these data or this code, please cite the paper below."
+title: "aipatientsim: data and code for language model simulations of psychiatric patients"
+repository-code: "https://github.com/ai4mhx/aipatientsim"
+license: MIT
+authors:
+  - given-names: Gouri Rajesh
+    family-names: Jadhav
+  - given-names: Manik Inder Singh
+    family-names: Sethi
+  - given-names: Madan
+    family-names: R
+  - given-names: Praveen
+    family-names: Raj
+  - given-names: Adarsh
+    family-names: Pal
+  - given-names: Sivakami Sundari
+    family-names: Subramanian
+  - given-names: Prottay Kumar
+    family-names: Adhikary
+  - given-names: Tanmoy
+    family-names: Chakraborty
+  - given-names: Suresh Bada
+    family-names: Math
+preferred-citation:
+  type: article
+  title: "Structural fidelity and unreliable affective evaluation in language model simulations of psychiatric patients"
+  journal: "Nature Communications (submitted)"
+  year: 2026
+  authors:
+    - given-names: Gouri Rajesh
+      family-names: Jadhav
+    - given-names: Manik Inder Singh
+      family-names: Sethi
+    - given-names: Madan
+      family-names: R
+    - given-names: Praveen
+      family-names: Raj
+    - given-names: Adarsh
+      family-names: Pal
+    - given-names: Sivakami Sundari
+      family-names: Subramanian
+    - given-names: Prottay Kumar
+      family-names: Adhikary
+    - given-names: Tanmoy
+      family-names: Chakraborty
+    - given-names: Suresh Bada
+      family-names: Math
