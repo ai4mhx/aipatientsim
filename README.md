@@ -112,7 +112,7 @@ these 30.
 ## Generation protocol
 
 All three models were accessed through their public consumer interfaces in
-September and October 2025, in default configurations. No fine-tuning, no
+October 2025, in default configurations. No fine-tuning, no
 developer or system-level instructions, and no custom personas beyond the
 in-conversation anchor prompt. Temperature and other decoding parameters were not
 exposed by these interfaces and were left at product defaults. This
@@ -126,7 +126,7 @@ All interviews, with models and with human participants alike, were conducted by
 the principal investigator, to reduce interviewer variance.
 
 Model versions change. Results here describe the specific snapshots available in
-September and October 2025 and should not be assumed to transfer.
+October 2025 and should not be assumed to transfer.
 
 ---
 
